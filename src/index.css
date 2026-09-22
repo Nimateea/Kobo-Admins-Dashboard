@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { background-color: #000; color: #f4f4f5; }
+.bar-bg { background-color: #171717; }
+.bar-fill { background-color: #6366f1; }
