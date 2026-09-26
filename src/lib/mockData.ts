@@ -88,3 +88,65 @@ export const RISK_EVENTS: RiskEvent[] = [
   { id: 'RSK-313', type: 'Multiple connection attempts', subjectId: 'USR-1083', severity: 'Medium', status: 'Resolved', detected: '15 Sep 08:02' },
   { id: 'RSK-314', type: 'Repeated password resets', subjectId: 'USR-1077', severity: 'High', status: 'Escalated', detected: '15 Sep 09:30' },
 ]
+
+export interface Transaction {
+  id: string
+  userId: string
+  type: 'Transfer' | 'Card payment' | 'Deposit' | 'Withdrawal'
+  amount: number
+  currency: string
+  status: 'Completed' | 'Pending' | 'Failed' | 'Flagged' | 'Adjusted'
+  provider: string
+  date: string
+}
+
+export const TRANSACTIONS: Transaction[] = [
+  { id: 'TXN-80421', userId: 'USR-1042', type: 'Transfer', amount: 125000, currency: 'NGN', status: 'Completed', provider: 'Paystack', date: '2026-09-26 10:42' },
+  { id: 'TXN-80420', userId: 'USR-1055', type: 'Deposit', amount: 48000, currency: 'NGN', status: 'Pending', provider: 'Flutterwave', date: '2026-09-26 10:35' },
+  { id: 'TXN-80419', userId: 'USR-1083', type: 'Card payment', amount: 79.99, currency: 'GBP', status: 'Flagged', provider: 'Mono', date: '2026-09-26 10:12' },
+  { id: 'TXN-80418', userId: 'USR-1077', type: 'Withdrawal', amount: 23000, currency: 'NGN', status: 'Failed', provider: 'Paystack', date: '2026-09-26 09:58' },
+  { id: 'TXN-80417', userId: 'USR-1090', type: 'Transfer', amount: 2150, currency: 'GHS', status: 'Completed', provider: 'Stitch', date: '2026-09-26 09:41' },
+  { id: 'TXN-80416', userId: 'USR-1124', type: 'Deposit', amount: 8500, currency: 'KES', status: 'Completed', provider: 'Mono', date: '2026-09-26 09:20' },
+  { id: 'TXN-80415', userId: 'USR-1102', type: 'Transfer', amount: 350000, currency: 'NGN', status: 'Flagged', provider: 'Paystack', date: '2026-09-26 08:57' },
+  { id: 'TXN-80414', userId: 'USR-1147', type: 'Card payment', amount: 42.5, currency: 'GBP', status: 'Completed', provider: 'Flutterwave', date: '2026-09-26 08:31' },
+]
+
+export interface LinkedAccount {
+  id: string
+  userId: string
+  institution: string
+  type: 'Current' | 'Savings' | 'Card' | 'Wallet'
+  balance: number
+  currency: string
+  status: 'Connected' | 'Syncing' | 'Review' | 'Disconnected'
+  lastSync: string
+}
+
+export const ACCOUNTS: LinkedAccount[] = [
+  { id: 'ACC-5011', userId: 'USR-1042', institution: 'Access Bank', type: 'Current', balance: 2845000, currency: 'NGN', status: 'Connected', lastSync: '2m ago' },
+  { id: 'ACC-5012', userId: 'USR-1042', institution: 'GTBank', type: 'Savings', balance: 840000, currency: 'NGN', status: 'Connected', lastSync: '5m ago' },
+  { id: 'ACC-5013', userId: 'USR-1055', institution: 'Zenith Bank', type: 'Current', balance: 135000, currency: 'NGN', status: 'Syncing', lastSync: 'Now' },
+  { id: 'ACC-5014', userId: 'USR-1083', institution: 'UBA', type: 'Savings', balance: 920000, currency: 'NGN', status: 'Review', lastSync: '1h ago' },
+  { id: 'ACC-5015', userId: 'USR-1090', institution: 'GCB Bank', type: 'Current', balance: 18700, currency: 'GHS', status: 'Connected', lastSync: '8m ago' },
+  { id: 'ACC-5016', userId: 'USR-1124', institution: 'Equity Bank', type: 'Wallet', balance: 46200, currency: 'KES', status: 'Connected', lastSync: '12m ago' },
+  { id: 'ACC-5017', userId: 'USR-1147', institution: 'Monzo', type: 'Current', balance: 3210, currency: 'GBP', status: 'Disconnected', lastSync: '6d ago' },
+]
+
+export interface AuditEvent {
+  id: string
+  time: string
+  actor: string
+  action: string
+  resource: string
+  result: 'Success' | 'Denied' | 'Pending'
+  ip: string
+}
+
+export const AUDIT_LOGS: AuditEvent[] = [
+  { id: 'AUD-9108', time: '2026-09-26 10:44:12', actor: 'Amara Obi', action: 'Viewed user profile', resource: 'USR-1042', result: 'Success', ip: '10.24.8.11' },
+  { id: 'AUD-9107', time: '2026-09-26 10:41:03', actor: 'Halima Sani', action: 'Requested user suspension', resource: 'USR-1061', result: 'Pending', ip: '10.24.8.29' },
+  { id: 'AUD-9106', time: '2026-09-26 10:22:51', actor: 'Ngozi Eze', action: 'Accessed analytics', resource: 'Analytics', result: 'Success', ip: '10.24.8.45' },
+  { id: 'AUD-9105', time: '2026-09-26 09:58:06', actor: 'Chidi Okeke', action: 'Exported transactions', resource: 'Transactions', result: 'Success', ip: '10.24.8.16' },
+  { id: 'AUD-9104', time: '2026-09-26 09:31:17', actor: 'Funmi Adebayo', action: 'Attempted risk review', resource: 'RSK-311', result: 'Denied', ip: '10.24.8.33' },
+  { id: 'AUD-9103', time: '2026-09-26 09:10:29', actor: 'Amara Obi', action: 'Updated feature flag', resource: 'new-dashboard', result: 'Success', ip: '10.24.8.11' },
+]

@@ -16,28 +16,36 @@ approval bug from the prototype is fixed here in a way a test locks in.
   grants as the prototype's `ROLES` object, plus `has(role, permission)`.
 - **Layout** (`src/components/Layout.tsx`) — sidebar with permission-gated
   nav links, identity card, sign out.
-- **Command Centre** (`src/pages/CommandCentre.tsx`) — KPI cards (static
-  values here; the prototype's period-filter and live-recalculation logic
-  isn't ported yet, see below).
+- **Command Centre** (`src/pages/CommandCentre.tsx`) — period-filtered KPIs
+  and transaction summaries.
 - **Users** (`src/pages/Users.tsx`, `src/components/DataTable.tsx`) — a
   generic sortable table component (click a header to sort, click again to
   reverse), status/risk filters, and saved views backed by `localStorage`
   (`src/lib/useSavedViews.ts`).
+- **Transactions and Accounts** (`src/pages/Transactions.tsx`,
+  `src/pages/Accounts.tsx`) — sample activity and linked-account tables,
+  permission-gated CSV exports, and maker-checker adjustment/disconnect
+  requests backed by `src/state/financeStore.ts`.
+- **Providers, Support, and Risk** (`src/pages/Providers.tsx`,
+  `src/pages/Support.tsx`, `src/pages/Risk.tsx`) — provider status controls,
+  ticket assignment/status/replies, and risk-event dispositions. Local state
+  is shared across routes through `src/state/operationsStore.ts`.
+- **Analytics, Feature Flags, Audit Logs, and Admin Assistant** — period-based
+  sample charts, local flag controls, filterable/exportable audit rows, and a
+  deterministic assistant that summarizes the included sample records.
 - **Approvals** (`src/pages/Approvals.tsx`, `src/state/approvalsStore.ts`) —
   the maker-checker engine. A Suspend button on the Users table creates a
   real approval request; Approvals shows Approve/Reject only to a
   *different* admin with the `approvals.decide` permission, and Cancel only
   to the original requester.
 
-## What isn't ported yet
+## Demo boundaries
 
-Everything else the single-file prototype has: Transactions, Accounts,
-Providers/Integrations, Support tickets + messaging, Risk & Security,
-Analytics with charts, Feature Flags, Audit Logs, the AI Admin Assistant,
-the period filter, dark-theme graph views, CSV export, and the rest of the
-~40 views. The patterns here (a Zustand store per concern, a page per
-route, `DataTable` for any list) are meant to make porting each of those
-mechanical — see "Adding a new page" below.
+All records are seeded in the browser; there is no production API, bank
+connection, or server-side persistence. Operational changes last for the
+current app session. The Admin Assistant uses deterministic local summaries,
+not a connected AI model. Other prototype views not named above still need
+their requirements and data contracts before they can be ported.
 
 ## Run it
 
@@ -45,7 +53,7 @@ mechanical — see "Adding a new page" below.
 npm install
 npm run dev       # http://localhost:5173
 npm run build     # type-checks with tsc, then builds — verified clean
-npm test          # Vitest + React Testing Library — 18 tests, all passing
+npm test          # Vitest + React Testing Library — 22 tests, all passing
 ```
 
 Demo accounts (same as the prototype): `amara.obi@kobo.com` (Super Admin),

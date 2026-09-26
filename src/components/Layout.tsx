@@ -6,6 +6,15 @@ import { has } from '../lib/permissions'
 const NAV: Array<{ label: string; to: string; permission: Parameters<typeof has>[1] }> = [
   { label: 'Command Centre', to: '/', permission: null },
   { label: 'Users', to: '/users', permission: 'users.read' },
+  { label: 'Transactions', to: '/transactions', permission: 'transactions.read' },
+  { label: 'Accounts', to: '/accounts', permission: 'accounts.read' },
+  { label: 'Providers', to: '/providers', permission: 'integrations.read' },
+  { label: 'Support', to: '/support', permission: 'support.read' },
+  { label: 'Risk & Security', to: '/risk', permission: 'risk.read' },
+  { label: 'Analytics', to: '/analytics', permission: 'analytics.read' },
+  { label: 'Feature Flags', to: '/feature-flags', permission: 'settings.read' },
+  { label: 'Audit Logs', to: '/audit-logs', permission: 'audit_logs.read' },
+  { label: 'Admin Assistant', to: '/assistant', permission: 'ai.read' },
   { label: 'Approvals', to: '/approvals', permission: 'approvals.decide' },
 ]
 
