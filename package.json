@@ -1,0 +1,9 @@
+{
+  "name": "kobo-admin-dashboard-static",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node --check api/config.js && node --test && node scripts/build.js",
+    "test": "node --test"
+  }
+}
