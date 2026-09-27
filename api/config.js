@@ -8,6 +8,12 @@ export default function handler(request, response) {
 
   const supabaseUrl = process.env.SUPABASE_URL?.trim()
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY?.trim()
+  const demoEmail = process.env.DEMO_EMAIL?.trim().toLowerCase()
+  const demoPassword = process.env.DEMO_PASSWORD
+  if (process.env.VERCEL_ENV === 'preview' && demoEmail && demoPassword?.length >= 16) {
+    return response.status(200).json({ demoMode: true, demoEmail })
+  }
+
   if (!supabaseUrl || !supabaseAnonKey) {
     return response.status(503).json({ error: 'Authentication is not configured' })
   }
